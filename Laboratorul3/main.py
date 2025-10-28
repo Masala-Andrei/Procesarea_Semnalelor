@@ -55,3 +55,34 @@ plt.show()
 # TODO: sa vad daca gasesc ceva mai bun decat scatter
 
 # 3
+
+axis = np.linspace(0, 1, 1000)
+# semnal1 + semnal2 + semnal3
+f1 = 10
+f2 = 220
+f3 = 450
+signal = np.sin(2 * np.pi * axis * f1) + np.sin(2 * np.pi * axis * f2 + np.pi / 6) + np.sin(
+    2 * np.pi * axis * f3 + np.pi / 4)
+N = len(signal)
+X = np.zeros(N, dtype=np.complex128)
+for omega in range(N):
+    for n in range(N):
+        X[omega] += signal[n] * np.exp(-2 * np.pi * 1j * omega * n / N)
+
+fig, axs = plt.subplots(1, 2, figsize=(12, 4))
+axs[0].plot(axis, signal)
+axs[0].set_xlabel("Timp (s)")
+axs[0].set_ylabel("x(t)")
+freq = np.fft.fftfreq(1000, 1 / 1000)
+markerline, stemlines, baseline = axs[1].stem(
+    freq, np.abs(X), linefmt="k-", markerfmt="ko"
+)
+markerline.set_markerfacecolor("none")
+stemlines.set_linewidth(0.5)
+baseline.set_color("k")
+axs[1].set_xlabel("Frecventa (Hz)")
+axs[1].set_ylabel("|X(ω)|")
+axs[1].set_xlim([0, 1000 / 2])
+
+plt.plot(axis, signal)
+plt.show()
