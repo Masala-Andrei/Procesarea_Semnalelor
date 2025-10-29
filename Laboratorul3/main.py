@@ -65,8 +65,8 @@ f3 = 123
 
 # semnal1 + semnal2 + semnal3
 signal = (np.sin(2 * np.pi * axis * f1) +
-          np.sin(2 * np.pi * axis * f2 + np.pi / 6) +
-          np.sin(2 * np.pi * axis * f3 + np.pi / 4))
+          3 * np.sin(2 * np.pi * axis * f2 + np.pi / 6) +
+          2 * np.sin(2 * np.pi * axis * f3 + np.pi / 4))
 
 X = np.zeros(N, dtype=np.complex128)
 for omega in range(N):
@@ -89,7 +89,8 @@ stemlines.set_linewidth(0.5)
 baseline.set_color("k")
 axs[1].set_xlabel("Frecventa (Hz)")
 axs[1].set_ylabel("|X(omega)|")
-axs[1].set_xlim([0, 1000 / 2])
+axs[1].set_xlim([0, 1000 / 2]) # daca pun toata lungimea semnalului, se repeta niste
+                                # frecvente
 
 plt.tight_layout()
 plt.show()
