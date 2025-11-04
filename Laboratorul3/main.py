@@ -20,7 +20,7 @@ import math
 #
 # dft = scipy.linalg.dft(N)  # matricea fourier discreta pt n = 8
 # print("Este unitara? - " + str(np.allclose(F, dft)))  # Trebuie sa declar ca elementele din F vor fi complexe upsi
-#
+
 # # 2
 #
 # axis = np.linspace(0, 1, 1000)
