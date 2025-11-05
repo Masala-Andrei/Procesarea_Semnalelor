@@ -16,9 +16,10 @@ axis = np.linspace(0, 1.0, 200)
 # axs[2].plot(axis, y)
 # for ax in axs:
 #     ax.set_xlim(0, 1)
+# plt.tight_layout()
 # plt.show()
 #
-# # 2
+# 2
 # frecventa = 2
 # x1 = np.sin(2 * np.pi * frecventa * axis + np.pi / 6)
 # x2 = np.sin(2 * np.pi * frecventa * axis + np.pi / 3)
@@ -39,7 +40,7 @@ axis = np.linspace(0, 1.0, 200)
 # fig, axs = plt.subplots(4)
 # i = 0
 # for snr, x in zip(SNR, X):
-#     gamma = np.linalg.norm(x) / (snr * np.linalg.norm(noise))
+#     gamma = np.linalg.norm(x) ** 2 / (snr ** 2 * np.linalg.norm(noise) ** 2)
 #     noisy_signal = x + gamma * noise
 #     ax.plot(axis, noisy_signal)
 #     axs[i].plot(axis, noisy_signal)
@@ -48,6 +49,7 @@ axis = np.linspace(0, 1.0, 200)
 # ax.set_xlim(0, 1.0)
 # for ax in axs:
 #     ax.set_xlim(0, 1)
+# plt.tight_layout()
 # plt.show()
 #
 # # 3
