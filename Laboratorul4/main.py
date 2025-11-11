@@ -62,32 +62,32 @@ from scipy.io import wavfile
 
 # 2
 # f < fs / 2, unde fs e frecv de esantionare, acum vreau ca fs / 2 < f
-# fs = 20
-# f = 8
-# t = np.linspace(0, 1, fs, endpoint=False)
-# t_good = np.linspace(0, 1, 10000, endpoint=False)
-#
-# signal_real = np.sin(2 * np.pi * f * t_good)
-# signal_esant = np.sin(2 * np.pi * f * t)
-#
-# f1 = f + fs
-# f2 = f + 2 * fs
-#
-# signal1_good = np.sin(2 * np.pi * f1 * t_good)
-# signal1 = np.sin(2 * np.pi * f1 * t)
-#
-# signal2_good = np.sin(2 * np.pi * f2 * t_good)
-# signal2 = np.sin(2 * np.pi * f2 * t)
-#
-# fig, axs = plt.subplots(3, figsize=(8, 6))
-# axs[0].plot(t_good, signal_real)
-# axs[0].plot(t, signal_esant, marker="o", linestyle="")
-# axs[1].plot(t_good, signal1_good)
-# axs[1].plot(t, signal1, marker="o", linestyle="")
-# axs[2].plot(t_good, signal2_good)
-# axs[2].plot(t, signal2, marker="o", linestyle="")
-# plt.tight_layout()
-# plt.show()
+fs = 20
+f = 8
+t = np.linspace(0, 1, fs, endpoint=False)
+t_good = np.linspace(0, 1, 10000, endpoint=False)
+
+signal_real = np.sin(2 * np.pi * f * t_good)
+signal_esant = np.sin(2 * np.pi * f * t)
+
+f1 = f + fs
+f2 = f + 2 * fs
+
+signal1_good = np.sin(2 * np.pi * f1 * t_good)
+signal1 = np.sin(2 * np.pi * f1 * t)
+
+signal2_good = np.sin(2 * np.pi * f2 * t_good)
+signal2 = np.sin(2 * np.pi * f2 * t)
+
+fig, axs = plt.subplots(3, figsize=(8, 6))
+axs[0].plot(t_good, signal_real)
+axs[0].plot(t, signal_esant, marker="o", linestyle="")
+axs[1].plot(t_good, signal1_good)
+axs[1].plot(t, signal1, marker="o", linestyle="")
+axs[2].plot(t_good, signal2_good)
+axs[2].plot(t, signal2, marker="o", linestyle="")
+plt.tight_layout()
+plt.show()
 #
 # # 3 fs / 2 > f
 # fs = 200
