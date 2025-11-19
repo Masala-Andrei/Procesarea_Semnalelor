@@ -187,4 +187,32 @@ plt.legend()
 plt.show()
 
 # f)
+orderl = 2
+orderg = 8
+rps = [2, 4, 7]
 
+plt.plot(x, label="Semnal brut")
+bb, ab = scipy.signal.butter(orderl, Wn_norm)
+x_butterl = scipy.signal.filtfilt(bb, ab, x)
+for rp in rps:
+    bc, ac = scipy.signal.cheby1(orderl, rp, Wn_norm)
+    x_cheby1 = scipy.signal.filtfilt(bc, ac, x)
+    plt.plot(x_cheby1, label="Chebyshev rp" + str(rp))
+
+plt.title("Semnal brut si filtrate ordin " + str(orderl))
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+plt.plot(x, label="Semnal brut")
+bb, ab = scipy.signal.butter(orderg, Wn_norm)
+x_butterg = scipy.signal.filtfilt(bb, ab, x)
+for rp in rps:
+    bc, ac = scipy.signal.cheby1(orderg, rp, Wn_norm)
+    x_cheby1 = scipy.signal.filtfilt(bc, ac, x)
+    plt.plot(x_cheby1, label="Chebyshev rp" + str(rp))
+
+plt.title("Semnal brut si filtrate ordin " + str(orderg))
+plt.legend()
+plt.tight_layout()
+plt.show()
