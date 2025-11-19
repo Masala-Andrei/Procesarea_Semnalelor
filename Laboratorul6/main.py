@@ -139,9 +139,9 @@ import scipy.signal
 
 # 6
 # a,b)
-# index = 3480
-# x = np.genfromtxt("Train.csv", delimiter=",", skip_header=1)
-# x = x[index: index + 24 * 3][:, 2]
+index = 3480
+x = np.genfromtxt("Train.csv", delimiter=",", skip_header=1)
+x = x[index: index + 24 * 3][:, 2]
 #
 # plt.plot(x, label="Semnal brut")
 # plt.title("Semnal brut si semnalele filtrate running average")
@@ -165,3 +165,26 @@ Wn_norm = Wn / f_nyq
 # d)
 order = 5
 rp = 5
+
+bb, ab = scipy.signal.butter(order, Wn_norm)
+bc, ac = scipy.signal.cheby1(order, rp, Wn_norm)
+
+wb, hb = scipy.signal.freqz(bb, ab)
+wc, hc = scipy.signal.freqz(bc, ac)
+
+plt.plot(wb, 20 * np.log10(np.abs(hb)), label="Butterworth")
+plt.plot(wc, 20 * np.log10(np.abs(hc)), label="Chebyshev")
+plt.legend()
+plt.show()
+
+# e)
+x_butter = scipy.signal.filtfilt(bb, ab, x)
+x_cheby1 = scipy.signal.filtfilt(bc, ac, x)
+plt.plot(x, label="Semnal brut")
+plt.plot(x_butter, label="Butterworth")
+plt.plot(x_cheby1, label="Chebyshev")
+plt.legend()
+plt.show()
+
+# f)
+
