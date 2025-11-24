@@ -186,5 +186,4 @@ plt.plot(x_cheby1, label="Chebyshev")
 plt.legend()
 plt.show()
 
-# f)
 
