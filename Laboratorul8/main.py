@@ -56,14 +56,19 @@ plt.show()
 
 # c
 def autoreg(series, p, m=None):
-    train_data = series[:-p]
-    test_data = series[-p:]
-    y = train_data[p:p+m] if m is not None else train_data[p:]  # iau ultimele p elem
     if m is None:
-        m = len(y)
-    Y = np.zeros((m, p))
+        train_data = series[:-p]
+        test_data = series[-p:]
+    else:
+        train_data = series[:-m]
+        test_data = series[-m:]
+
+    y = train_data[p:]
+    k = len(y)
+    Y = np.zeros((k, p))
+
     # zic ca ult elem din y este o combinatie a primelor p elemente, d aia in y iau de la p incolo
-    for t in range(m):
+    for t in range(k):
         for lag in range(p):
             Y[t, lag] = train_data[t + p - lag - 1]  # sper sa fi nimerit coef
     big_gamma = Y.T @ Y
@@ -72,7 +77,9 @@ def autoreg(series, p, m=None):
 
     predictions = []
     last_values = train_data[-p:]
-    for i in range(p):
+
+    horizon = m if m is not None else p
+    for i in range(horizon):
         pred = x_star @ last_values[::-1]
         predictions.append(pred)
         last_values = np.append(last_values[1:], pred)
@@ -91,6 +98,7 @@ plt.show()
 
 
 # d
+# !!! TODO Trebuie sa recitesc exercitiul pentru ca simt ca n am inteles ce aveam de fapt de facut !!!
 
 def tune_mp(series, m_range):
     best_error = np.inf
@@ -100,12 +108,12 @@ def tune_mp(series, m_range):
         for p in range(2, m):
             if m + p > N:
                 break
-            train_data = series[:N-m]
-            test_data = series[N-m:]
+            train_data = series[:-m]
+            test_data = series[-m:]
             y = train_data[p:]
-
-            Y = np.zeros((m, p))
-            for t in range(m):
+            k = len(y)
+            Y = np.zeros((k, p))
+            for t in range(k):
                 for lag in range(p):
                     Y[t, lag] = train_data[t + p - lag - 1]
             big_gamma = Y.T @ Y
@@ -135,5 +143,7 @@ plt.plot(x_pred, pred, "r-", label="Prediction", alpha=0.7)
 plt.plot(x_pred, test_data, "g-", label="Real", alpha=0.7)
 plt.legend()
 plt.show()
+
+
 
 
